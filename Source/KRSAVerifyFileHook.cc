@@ -39,8 +39,8 @@ namespace WPSProfileVerificationPatch {
         }
         std::span<const uint8_t> data;
         std::optional<std::span<const uint8_t>> internalName = VersionUtil::QueryVersionInfoValue(versionInfoData, "\\StringFileInfo\\000004b0\\InternalName");
-        if (internalName.has_value() && internalName->size() == 8 && std::memcmp(internalName->data(), "KPacket", 8) == 0) {
-            // InternalName 是 KPacket 表明这是安装程序，要在主模块中查找特征码
+        if (internalName.has_value() && internalName->size() >= 8 && std::memcmp(internalName->data(), "KPacket", 7) == 0) {
+            // InternalName 以 KPacket 开头表明这是安装程序，要在主模块中查找特征码
             HMODULE module = ModuleUtil::GetHandle(std::nullopt);
             data = std::span<const uint8_t>(reinterpret_cast<const uint8_t*>(module), ModuleUtil::GetSizeOfMemory(module));
         } else {
