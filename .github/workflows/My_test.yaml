@@ -5,7 +5,12 @@ on:
     tags:
       - "v*.*.*"
 
-    workflow_dispatch:  # 允许手动触发  
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'The tag to deploy (must match v*.*.*)'
+        required: true
+        default: 'v1.0.0'
 
 permissions:
   contents: write
