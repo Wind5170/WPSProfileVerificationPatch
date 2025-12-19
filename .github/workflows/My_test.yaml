@@ -1,9 +1,11 @@
 name: Build And Release
 
 on:
-    workflow_dispatch:  # 允许手动触发  push:
+    push:
     tags:
       - "v*.*.*"
+
+    workflow_dispatch:  # 允许手动触发  
 
 permissions:
   contents: write
