@@ -13,7 +13,7 @@ permissions:
   contents: write
 
 jobs:
-  build_and_release:
+  Create and Use Tag:
     runs-on: windows-latest
     steps:
 
